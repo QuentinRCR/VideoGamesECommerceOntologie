@@ -296,6 +296,12 @@ gr:greaterOrEqual rdf:type owl:ObjectProperty ;
                   rdfs:label "greater or equal (0..*)"@en .
 
 
+###  http://purl.org/goodrelations/v1#hasAddOn
+gr:hasAddOn rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            rdfs:range gr:Software .
+
+
 ###  http://purl.org/goodrelations/v1#hasBrand
 gr:hasBrand rdf:type owl:ObjectProperty ;
             rdfs:domain [ rdf:type owl:Class ;
@@ -399,6 +405,14 @@ gr:hasManufacturer rdf:type owl:ObjectProperty ;
                    rdfs:label "has manufacturer (0..1)"@en .
 
 
+###  http://purl.org/goodrelations/v1#hasMinimumSystemRequirements
+gr:hasMinimumSystemRequirements rdf:type owl:ObjectProperty ;
+                                rdfs:subPropertyOf gr:hasSystemRequirement ;
+                                rdfs:domain gr:Software ;
+                                rdfs:range gr:SystemRequirements ;
+                                rdfs:comment "Minimum system requirements to be able to launch the software" .
+
+
 ###  http://purl.org/goodrelations/v1#hasMusicBy
 gr:hasMusicBy rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf owl:topObjectProperty .
@@ -491,11 +505,23 @@ Recommended retail prices etc. can be marked by the gr:priceType property of the
                          rdfs:label "has price specification (0..*)"@en .
 
 
+###  http://purl.org/goodrelations/v1#hasRecommendedSystemRequirement
+gr:hasRecommendedSystemRequirement rdf:type owl:ObjectProperty ;
+                                   rdfs:subPropertyOf gr:hasSystemRequirement ;
+                                   rdfs:domain gr:Software ;
+                                   rdfs:range gr:SystemRequirements ;
+                                   rdfs:comment "Recommended system configuration to run the software smoothly" .
+
+
 ###  http://purl.org/goodrelations/v1#hasSonsors
 gr:hasSonsors rdf:type owl:ObjectProperty ;
               rdfs:range <http://schema.org/Organization> ,
                          <http://schema.org/Person> ;
               rdfs:comment "The list of person that sponsorized the work" .
+
+
+###  http://purl.org/goodrelations/v1#hasSystemRequirement
+gr:hasSystemRequirement rdf:type owl:ObjectProperty .
 
 
 ###  http://purl.org/goodrelations/v1#hasWarrantyPromise
@@ -790,12 +816,26 @@ gr:valueReference rdf:type owl:ObjectProperty ;
                   rdfs:label "value reference (0..*)"@en .
 
 
+###  http://purl.org/goodrelations/v1#wasDevelopedBy
+gr:wasDevelopedBy rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf owl:topObjectProperty ;
+                  rdfs:range <http://schema.org/Organization> ,
+                             <http://schema.org/Person> .
+
+
 ###  http://purl.org/goodrelations/v1#wasFounedBy
 gr:wasFounedBy rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf owl:topObjectProperty ;
                rdfs:range <http://schema.org/Organization> ,
                           <http://schema.org/Person> ;
                rdfs:comment "This entiry was founded by someone" .
+
+
+###  http://purl.org/goodrelations/v1#wasPublishedBy
+gr:wasPublishedBy rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf owl:topObjectProperty ;
+                  rdfs:range <http://schema.org/Organization> ,
+                             <http://schema.org/Person> .
 
 
 ###  http://purl.org/goodrelations/v1#weight
@@ -1106,9 +1146,21 @@ gr:hasAchievements rdf:type owl:DatatypeProperty ;
                    rdfs:comment "A list of challenges that are validated by achieving particular actions in the game." .
 
 
+###  http://purl.org/goodrelations/v1#hasAvailableLanguage
+gr:hasAvailableLanguage rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf owl:topDataProperty ;
+                        rdfs:range xsd:string .
+
+
 ###  http://purl.org/goodrelations/v1#hasAwards
 gr:hasAwards rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf owl:topDataProperty .
+
+
+###  http://purl.org/goodrelations/v1#hasCPU
+gr:hasCPU rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf gr:hasSystemDescription ;
+          rdfs:range xsd:string .
 
 
 ###  http://purl.org/goodrelations/v1#hasCriteria
@@ -1156,6 +1208,18 @@ gr:hasDUNS rdf:type owl:DatatypeProperty ;
            rdfs:label "has DUNS (0..1)"@en .
 
 
+###  http://purl.org/goodrelations/v1#hasDependencies
+gr:hasDependencies rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:range xsd:string .
+
+
+###  http://purl.org/goodrelations/v1#hasDistributionCopy
+gr:hasDistributionCopy rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf owl:topDataProperty ;
+                       rdfs:range xsd:string .
+
+
 ###  http://purl.org/goodrelations/v1#hasEAN_UCC-13
 gr:hasEAN_UCC-13 rdf:type owl:DatatypeProperty ;
                  rdfs:subPropertyOf <http://schema.org/productID> ;
@@ -1172,6 +1236,18 @@ Note 1: When using this property for searching by 12-digit UPC codes, you must a
 Note 2: As of January 1, 2007, the former ISBN numbers for books etc. have been integrated into the EAN·UCC-13 code. For each old ISBN-10 code, there exists a proper translation into EAN·UCC-13 by adding \"978\" or \"979\" as prefix. Since the old ISBN-10 is now deprecated, GoodRelations does not provide a property for ISBNs."""@en ;
                  rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                  rdfs:label "has EAN/UCC-13 (0..*)"@en .
+
+
+###  http://purl.org/goodrelations/v1#hasEULARules
+gr:hasEULARules rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdfs:range xsd:string .
+
+
+###  http://purl.org/goodrelations/v1#hasGPU
+gr:hasGPU rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf gr:hasSystemDescription ;
+          rdfs:range xsd:string .
 
 
 ###  http://purl.org/goodrelations/v1#hasGTIN-14
@@ -1377,12 +1453,54 @@ Note: While NAICS codes are sometimes misused for classifying products or servic
             rdfs:label "has NAICS (0..*)"@en .
 
 
+###  http://purl.org/goodrelations/v1#hasNetwork
+gr:hasNetwork rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf gr:hasSystemDescription ;
+              rdfs:range xsd:string .
+
+
+###  http://purl.org/goodrelations/v1#hasOS
+gr:hasOS rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf gr:hasSystemDescription ;
+         rdfs:range xsd:string .
+
+
+###  http://purl.org/goodrelations/v1#hasPermissions
+gr:hasPermissions rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:range xsd:string .
+
+
+###  http://purl.org/goodrelations/v1#hasPlateforme
+gr:hasPlateforme rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdfs:range xsd:string .
+
+
+###  http://purl.org/goodrelations/v1#hasRAM
+gr:hasRAM rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf gr:hasSystemDescription ;
+          rdfs:range xsd:integer .
+
+
 ###  http://purl.org/goodrelations/v1#hasRating
 gr:hasRating rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf owl:topDataProperty ;
              rdfs:domain gr:PEGI ;
              rdfs:range xsd:double ;
              rdfs:comment "Describe the age limite to experience a creative work" .
+
+
+###  http://purl.org/goodrelations/v1#hasReleaseDate
+gr:hasReleaseDate rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:range xsd:time .
+
+
+###  http://purl.org/goodrelations/v1#hasReleaseNotes
+gr:hasReleaseNotes rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:range xsd:string .
 
 
 ###  http://purl.org/goodrelations/v1#hasStatus
@@ -1417,6 +1535,19 @@ Usually, the properties gr:hasEAN_UCC-13 and gr:hasGTIN-14 are much more reliabl
 See also http://en.wikipedia.org/wiki/Stock_Keeping_Unit."""@en ;
                        rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                        rdfs:label "has Stock Keeping Unit (0..*)"@en .
+
+
+###  http://purl.org/goodrelations/v1#hasStorage
+gr:hasStorage rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf gr:hasSystemDescription ;
+              rdfs:range xsd:integer .
+
+
+###  http://purl.org/goodrelations/v1#hasSystemDescription
+gr:hasSystemDescription rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf owl:topDataProperty ;
+                        rdfs:domain gr:Software ;
+                        rdfs:comment "Minimum system requirements to be able to launch the software" .
 
 
 ###  http://purl.org/goodrelations/v1#hasUnitOfMeasurement
@@ -1464,6 +1595,12 @@ gr:hasValueInteger rdf:type owl:DatatypeProperty ;
                    rdfs:comment "This subproperty specifies that the upper and lower limit of the given gr:QuantitativeValueInteger are identical and have the respective integer value. It is a shortcut for such cases where a quantitative property is (at least practically) a single point value and not an interval."@en ;
                    rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                    rdfs:label "has value integer (0..1)"@en .
+
+
+###  http://purl.org/goodrelations/v1#hasVersion
+gr:hasVersion rdf:type owl:DatatypeProperty ;
+              rdfs:domain gr:Software ;
+              rdfs:range xsd:string .
 
 
 ###  http://purl.org/goodrelations/v1#isFree
@@ -2314,6 +2451,79 @@ Compatibility with schema.org: This class is a subclass of http://schema.org/Qua
                             rdfs:label "Quantitative value integer"@en .
 
 
+###  http://purl.org/goodrelations/v1#Software
+gr:Software rdf:type owl:Class ;
+            rdfs:subClassOf gr:Creative_Work ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:hasAddOn ;
+                              owl:someValuesFrom gr:Software
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:hasMinimumSystemRequirements ;
+                              owl:someValuesFrom gr:SystemRequirements
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:hasRecommendedSystemRequirement ;
+                              owl:someValuesFrom gr:SystemRequirements
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:wasDevelopedBy ;
+                              owl:someValuesFrom [ rdf:type owl:Class ;
+                                                   owl:unionOf ( <http://schema.org/Organization>
+                                                                 <http://schema.org/Person>
+                                                               )
+                                                 ]
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:wasPublishedBy ;
+                              owl:someValuesFrom [ rdf:type owl:Class ;
+                                                   owl:unionOf ( <http://schema.org/Organization>
+                                                                 <http://schema.org/Person>
+                                                               )
+                                                 ]
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:hasAvailableLanguage ;
+                              owl:someValuesFrom xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:hasDependencies ;
+                              owl:someValuesFrom xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:hasDistributionCopy ;
+                              owl:someValuesFrom xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:hasEULARules ;
+                              owl:someValuesFrom xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:hasPermissions ;
+                              owl:someValuesFrom xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:hasPlateforme ;
+                              owl:someValuesFrom xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:hasReleaseDate ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:time
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:hasReleaseNotes ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:hasVersion ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:string
+                            ] ;
+            rdfs:comment "A software application meant to run on electronic devices" .
+
+
 ###  http://purl.org/goodrelations/v1#SomeItems
 gr:SomeItems rdf:type owl:Class ;
              rdfs:subClassOf gr:ProductOrService ,
@@ -2327,6 +2537,35 @@ Note: This class is the new, shorter form of the former gr:ProductOrServicesSome
 Compatibility with schema.org: This class is (approximately) a subclass of http://schema.org/Product."""@en ;
              rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
              rdfs:label "Some items"@en .
+
+
+###  http://purl.org/goodrelations/v1#SystemRequirements
+gr:SystemRequirements rdf:type owl:Class ;
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty gr:hasCPU ;
+                                        owl:someValuesFrom xsd:string
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gr:hasGPU ;
+                                        owl:someValuesFrom xsd:string
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gr:hasNetwork ;
+                                        owl:someValuesFrom xsd:string
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gr:hasOS ;
+                                        owl:someValuesFrom xsd:string
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gr:hasRAM ;
+                                        owl:someValuesFrom xsd:integer
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gr:hasStorage ;
+                                        owl:someValuesFrom xsd:integer
+                                      ] ;
+                      rdfs:comment "A set of computer component descriptors that represent a generic system): Minimum system requirements to be able to launch the software" .
 
 
 ###  http://purl.org/goodrelations/v1#TypeAndQuantityNode
@@ -2375,10 +2614,11 @@ Note 2: For Google, attaching a gr:validThrough statement to a gr:UnitPriceSpeci
 
 ###  http://purl.org/goodrelations/v1#VideoGame
 gr:VideoGame rdf:type owl:Class ;
-             rdfs:subClassOf gr:Creative_Work ,
+             rdfs:subClassOf gr:Software ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty gr:hasPegi ;
-                               owl:someValuesFrom gr:PEGI
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass gr:PEGI
                              ] ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty gr:hasAchievements ;
