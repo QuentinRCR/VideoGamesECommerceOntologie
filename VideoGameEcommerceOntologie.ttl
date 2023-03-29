@@ -455,6 +455,14 @@ gr:hasPOS rdf:type owl:ObjectProperty ;
           rdfs:label "has POS (0..*)"@en .
 
 
+###  http://purl.org/goodrelations/v1#hasPegi
+gr:hasPegi rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdfs:domain gr:VideoGame ;
+           rdfs:range gr:PEGI ;
+           rdfs:comment "Give the PEGI Value of a game" .
+
+
 ###  http://purl.org/goodrelations/v1#hasPrevious
 gr:hasPrevious rdf:type owl:ObjectProperty ;
                rdfs:domain gr:DayOfWeek ;
@@ -481,6 +489,13 @@ gr:hasPriceSpecification rdf:type owl:ObjectProperty ;
 Recommended retail prices etc. can be marked by the gr:priceType property of the gr:UnitPriceSpecification."""@en ;
                          rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                          rdfs:label "has price specification (0..*)"@en .
+
+
+###  http://purl.org/goodrelations/v1#hasSonsors
+gr:hasSonsors rdf:type owl:ObjectProperty ;
+              rdfs:range <http://schema.org/Organization> ,
+                         <http://schema.org/Person> ;
+              rdfs:comment "The list of person that sponsorized the work" .
 
 
 ###  http://purl.org/goodrelations/v1#hasWarrantyPromise
@@ -573,6 +588,13 @@ gr:isConsumableFor rdf:type owl:ObjectProperty ;
                    rdfs:comment "This states that a particular gr:ProductOrService is a consumable for another product or service."@en ;
                    rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                    rdfs:label "is consumable for (0..*)"@en .
+
+
+###  http://purl.org/goodrelations/v1#isFrom
+gr:isFrom rdf:type owl:ObjectProperty ;
+          rdfs:domain gr:Creative_Work ;
+          rdfs:range gr:Country ;
+          rdfs:comment "The country in which the creation process initiated" .
 
 
 ###  http://purl.org/goodrelations/v1#isOwnedBy
@@ -768,6 +790,14 @@ gr:valueReference rdf:type owl:ObjectProperty ;
                   rdfs:label "value reference (0..*)"@en .
 
 
+###  http://purl.org/goodrelations/v1#wasFounedBy
+gr:wasFounedBy rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               rdfs:range <http://schema.org/Organization> ,
+                          <http://schema.org/Person> ;
+               rdfs:comment "This entiry was founded by someone" .
+
+
 ###  http://purl.org/goodrelations/v1#weight
 gr:weight rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf gr:quantitativeProductOrServiceProperty ;
@@ -808,7 +838,8 @@ Typical unit code(s): CMT for centimeters, INH for inches"""@en ;
 
 
 ###  http://www.w3.org/2002/07/owl#topObjectProperty
-owl:topObjectProperty rdfs:range <http://schema.org/Person> .
+owl:topObjectProperty rdfs:range <http://schema.org/Person> ;
+                      rdfs:comment "All the hardware that has to be connected to play properly.For instance: the keyboard, the mouse …" .
 
 
 ###  http://xmlns.com/foaf/0.1/depiction
@@ -1067,9 +1098,23 @@ gr:hasAccessConditions rdf:type owl:DatatypeProperty ;
                        rdfs:subPropertyOf owl:topDataProperty .
 
 
+###  http://purl.org/goodrelations/v1#hasAchievements
+gr:hasAchievements rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain gr:VideoGame ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "A list of challenges that are validated by achieving particular actions in the game." .
+
+
 ###  http://purl.org/goodrelations/v1#hasAwards
 gr:hasAwards rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf owl:topDataProperty .
+
+
+###  http://purl.org/goodrelations/v1#hasCriteria
+gr:hasCriteria rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
+               rdfs:range xsd:string .
 
 
 ###  http://purl.org/goodrelations/v1#hasCurrency
@@ -1159,6 +1204,14 @@ gr:hasGTIN-8 rdf:type owl:DatatypeProperty ;
              rdfs:label "has GTIN-8 (0..*)"@en .
 
 
+###  http://purl.org/goodrelations/v1#hasGameMode
+gr:hasGameMode rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
+               rdfs:domain gr:VideoGame ;
+               rdfs:range xsd:string ;
+               rdfs:comment "All the ways a player can play in the game. They can play with other player, alone, on a local server." .
+
+
 ###  http://purl.org/goodrelations/v1#hasGlobalLocationNumber
 gr:hasGlobalLocationNumber rdf:type owl:DatatypeProperty ;
                            rdfs:domain [ rdf:type owl:Class ;
@@ -1190,6 +1243,14 @@ gr:hasISICv4 rdf:type owl:DatatypeProperty ;
 Note: While ISIC codes are sometimes misused for classifying products or services, they are designed and suited only for classifying business establishments."""@en ;
              rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
              rdfs:label "has ISIC v4 (0..*)"@en .
+
+
+###  http://purl.org/goodrelations/v1#hasInput
+gr:hasInput rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf owl:topDataProperty ;
+            rdfs:domain gr:VideoGame ;
+            rdfs:range xsd:string ;
+            rdfs:comment "All the hardware that has to be connected to play properly.For instance: the keyboard, the mouse …" .
 
 
 ###  http://purl.org/goodrelations/v1#hasLicence
@@ -1316,6 +1377,21 @@ Note: While NAICS codes are sometimes misused for classifying products or servic
             rdfs:label "has NAICS (0..*)"@en .
 
 
+###  http://purl.org/goodrelations/v1#hasRating
+gr:hasRating rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:domain gr:PEGI ;
+             rdfs:range xsd:double ;
+             rdfs:comment "Describe the age limite to experience a creative work" .
+
+
+###  http://purl.org/goodrelations/v1#hasStatus
+gr:hasStatus rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:range xsd:string ;
+             rdfs:comment "Whether the work is in progress, released but still with some updates, finished, etc" .
+
+
 ###  http://purl.org/goodrelations/v1#hasStockKeepingUnit
 gr:hasStockKeepingUnit rdf:type owl:DatatypeProperty ;
                        rdfs:subPropertyOf <http://schema.org/productID> ;
@@ -1388,6 +1464,26 @@ gr:hasValueInteger rdf:type owl:DatatypeProperty ;
                    rdfs:comment "This subproperty specifies that the upper and lower limit of the given gr:QuantitativeValueInteger are identical and have the respective integer value. It is a shortcut for such cases where a quantitative property is (at least practically) a single point value and not an interval."@en ;
                    rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                    rdfs:label "has value integer (0..1)"@en .
+
+
+###  http://purl.org/goodrelations/v1#isFree
+gr:isFree rdf:type owl:DatatypeProperty ;
+          rdfs:range xsd:boolean ;
+          rdfs:comment "Rather or not the art is free" .
+
+
+###  http://purl.org/goodrelations/v1#isFromFranchise
+gr:isFromFranchise rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "Is part of a list of same games" .
+
+
+###  http://purl.org/goodrelations/v1#isFromGenre
+gr:isFromGenre rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
+               rdfs:range xsd:string ;
+               rdfs:comment "Type of the game. Infer the kind of gameplay. It can be for instance : adventure, action." .
 
 
 ###  http://purl.org/goodrelations/v1#isListPrice
@@ -1615,6 +1711,26 @@ gr:vatID rdf:type owl:DatatypeProperty ;
          rdfs:label "VAT ID (0..1)"@en .
 
 
+###  http://purl.org/goodrelations/v1#wasCreated
+gr:wasCreated rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf owl:topDataProperty ;
+              rdfs:range xsd:time ;
+              rdfs:comment "The official starting date of the work" .
+
+
+###  http://purl.org/goodrelations/v1#wasLastModified
+gr:wasLastModified rdf:type owl:DatatypeProperty ;
+                   rdfs:range xsd:time ;
+                   rdfs:comment "The last date where any content has been modified" .
+
+
+###  http://purl.org/goodrelations/v1#wasPublished
+gr:wasPublished rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdfs:range xsd:time ;
+                rdfs:comment "The first time the work has become publicly available through some means" .
+
+
 ###  http://schema.org/description
 <http://schema.org/description> rdf:type owl:DatatypeProperty .
 
@@ -1750,7 +1866,11 @@ Examples: A particular offering made by Miller Rentals Ltd. says that they (1) s
 gr:Copyright rdf:type owl:Class ;
              rdfs:subClassOf [ rdf:type owl:Restriction ;
                                owl:onProperty gr:isOwnedBy ;
-                               owl:someValuesFrom <http://schema.org/Person>
+                               owl:someValuesFrom [ rdf:type owl:Class ;
+                                                    owl:unionOf ( <http://schema.org/Organization>
+                                                                  <http://schema.org/Person>
+                                                                )
+                                                  ]
                              ] ,
                              [ rdf:type owl:Restriction ;
                                owl:onProperty gr:description ;
@@ -1762,12 +1882,20 @@ gr:Copyright rdf:type owl:Class ;
                              ] .
 
 
+###  http://purl.org/goodrelations/v1#Country
+gr:Country rdf:type owl:Class .
+
+
 ###  http://purl.org/goodrelations/v1#Creative_Work
 gr:Creative_Work rdf:type owl:Class ;
                  rdfs:subClassOf gr:ProductOrServiceModel ,
                                  [ rdf:type owl:Restriction ;
                                    owl:onProperty gr:hasContributors ;
-                                   owl:someValuesFrom <http://schema.org/Person>
+                                   owl:someValuesFrom [ rdf:type owl:Class ;
+                                                        owl:unionOf ( <http://schema.org/Organization>
+                                                                      <http://schema.org/Person>
+                                                                    )
+                                                      ]
                                  ] ,
                                  [ rdf:type owl:Restriction ;
                                    owl:onProperty gr:hasCopyright ;
@@ -1775,7 +1903,31 @@ gr:Creative_Work rdf:type owl:Class ;
                                  ] ,
                                  [ rdf:type owl:Restriction ;
                                    owl:onProperty gr:hasMusicBy ;
-                                   owl:someValuesFrom <http://schema.org/Person>
+                                   owl:someValuesFrom [ rdf:type owl:Class ;
+                                                        owl:unionOf ( <http://schema.org/Organization>
+                                                                      <http://schema.org/Person>
+                                                                    )
+                                                      ]
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:hasSonsors ;
+                                   owl:someValuesFrom [ rdf:type owl:Class ;
+                                                        owl:unionOf ( <http://schema.org/Organization>
+                                                                      <http://schema.org/Person>
+                                                                    )
+                                                      ]
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:isFrom ;
+                                   owl:someValuesFrom gr:Country
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:wasFounedBy ;
+                                   owl:someValuesFrom [ rdf:type owl:Class ;
+                                                        owl:unionOf ( <http://schema.org/Organization>
+                                                                      <http://schema.org/Person>
+                                                                    )
+                                                      ]
                                  ] ,
                                  [ rdf:type owl:Restriction ;
                                    owl:onProperty gr:description ;
@@ -1786,6 +1938,10 @@ gr:Creative_Work rdf:type owl:Class ;
                                    owl:someValuesFrom xsd:string
                                  ] ,
                                  [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:hasStatus ;
+                                   owl:someValuesFrom xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
                                    owl:onProperty gr:name ;
                                    owl:someValuesFrom xsd:string
                                  ] ,
@@ -1793,6 +1949,26 @@ gr:Creative_Work rdf:type owl:Class ;
                                    owl:onProperty gr:hasLicence ;
                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                    owl:onDataRange xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:isFree ;
+                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onDataRange xsd:boolean
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:wasCreated ;
+                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onDataRange xsd:time
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:wasLastModified ;
+                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onDataRange xsd:time
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:wasPublished ;
+                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onDataRange xsd:time
                                  ] .
 
 
@@ -1862,6 +2038,11 @@ gr:DeliveryModeParcelService rdf:type owl:Class ;
 Examples: UPS, DHL"""@en ;
                              rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                              rdfs:label "Delivery mode parcel service"@en .
+
+
+###  http://purl.org/goodrelations/v1#GamePlay
+gr:GamePlay rdf:type owl:Class ;
+            rdfs:comment "Elements related to how the game is played; input methods, game modes and if achievements are available or not" .
 
 
 ###  http://purl.org/goodrelations/v1#Individual
@@ -1969,6 +2150,11 @@ gr:OpeningHoursSpecification rdf:type owl:Class ;
                              rdfs:comment "This is a conceptual entity that holds together all information about the opening hours on a given day (gr:DayOfWeek)."@en ;
                              rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                              rdfs:label "Opening hours specification"@en .
+
+
+###  http://purl.org/goodrelations/v1#PEGI
+gr:PEGI rdf:type owl:Class ;
+        rdfs:comment "A system with 6 age categories and 8 content descriptors to indicate if a certain video game is appropriate for children of a certain age" .
 
 
 ###  http://purl.org/goodrelations/v1#PaymentChargeSpecification
@@ -2185,6 +2371,39 @@ Note 2: For Google, attaching a gr:validThrough statement to a gr:UnitPriceSpeci
 """@en ;
                           rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                           rdfs:label "Unit price specification"@en .
+
+
+###  http://purl.org/goodrelations/v1#VideoGame
+gr:VideoGame rdf:type owl:Class ;
+             rdfs:subClassOf gr:Creative_Work ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty gr:hasPegi ;
+                               owl:someValuesFrom gr:PEGI
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty gr:hasAchievements ;
+                               owl:someValuesFrom xsd:string
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty gr:hasGameMode ;
+                               owl:someValuesFrom xsd:string
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty gr:hasInput ;
+                               owl:someValuesFrom xsd:string
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty gr:hasRating ;
+                               owl:someValuesFrom xsd:double
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty gr:isFromFranchise ;
+                               owl:someValuesFrom xsd:string
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty gr:isFromGenre ;
+                               owl:someValuesFrom xsd:string
+                             ] .
 
 
 ###  http://purl.org/goodrelations/v1#WarrantyPromise
