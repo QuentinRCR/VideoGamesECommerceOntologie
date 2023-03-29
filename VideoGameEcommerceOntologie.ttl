@@ -188,6 +188,7 @@ gr:availableDeliveryMethods rdf:type owl:ObjectProperty ;
 
 ###  http://purl.org/goodrelations/v1#deliveryLeadTime
 gr:deliveryLeadTime rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
                     rdfs:domain [ rdf:type owl:Class ;
                                   owl:unionOf ( gr:Offering
                                                 <http://schema.org/Offer>
@@ -326,6 +327,17 @@ Note: While it is possible that an entity is offering multiple types of business
                        rdfs:label "has business function (1..*)"@en .
 
 
+###  http://purl.org/goodrelations/v1#hasContributors
+gr:hasContributors rdf:type owl:ObjectProperty ;
+                   rdfs:range <http://schema.org/Person> .
+
+
+###  http://purl.org/goodrelations/v1#hasCopyright
+gr:hasCopyright rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf owl:topObjectProperty ;
+                rdfs:range gr:Copyright .
+
+
 ###  http://purl.org/goodrelations/v1#hasEligibleQuantity
 gr:hasEligibleQuantity rdf:type owl:ObjectProperty ;
                        rdfs:domain [ rdf:type owl:Class ;
@@ -385,6 +397,11 @@ gr:hasManufacturer rdf:type owl:ObjectProperty ;
                    rdfs:comment "This object property links a gr:ProductOrService to the gr:BusinessEntity that produces it. Mostly used with gr:ProductOrServiceModel."@en ;
                    rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                    rdfs:label "has manufacturer (0..1)"@en .
+
+
+###  http://purl.org/goodrelations/v1#hasMusicBy
+gr:hasMusicBy rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty .
 
 
 ###  http://purl.org/goodrelations/v1#hasNext
@@ -558,6 +575,12 @@ gr:isConsumableFor rdf:type owl:ObjectProperty ;
                    rdfs:label "is consumable for (0..*)"@en .
 
 
+###  http://purl.org/goodrelations/v1#isOwnedBy
+gr:isOwnedBy rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             owl:inverseOf gr:owns .
+
+
 ###  http://purl.org/goodrelations/v1#isSimilarTo
 gr:isSimilarTo rdf:type owl:ObjectProperty ;
                rdfs:domain [ rdf:type owl:Class ;
@@ -629,6 +652,7 @@ gr:offers rdf:type owl:ObjectProperty ;
 
 ###  http://purl.org/goodrelations/v1#owns
 gr:owns rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf owl:topObjectProperty ;
         rdfs:domain [ rdf:type owl:Class ;
                       owl:unionOf ( gr:BusinessEntity
                                     <http://schema.org/Organization>
@@ -781,6 +805,10 @@ Typical unit code(s): CMT for centimeters, INH for inches"""@en ;
 
 ###  http://schema.org/manufacturer
 <http://schema.org/manufacturer> rdf:type owl:ObjectProperty .
+
+
+###  http://www.w3.org/2002/07/owl#topObjectProperty
+owl:topObjectProperty rdfs:range <http://schema.org/Person> .
 
 
 ###  http://xmlns.com/foaf/0.1/depiction
@@ -1034,6 +1062,16 @@ Important: Do NOT use 3-letter ISO 3166-1 codes!"""@en ;
                    rdfs:label "eligible regions (0..*)"@en .
 
 
+###  http://purl.org/goodrelations/v1#hasAccessConditions
+gr:hasAccessConditions rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf owl:topDataProperty .
+
+
+###  http://purl.org/goodrelations/v1#hasAwards
+gr:hasAwards rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty .
+
+
 ###  http://purl.org/goodrelations/v1#hasCurrency
 gr:hasCurrency rdf:type owl:DatatypeProperty ;
                rdfs:domain gr:PriceSpecification ;
@@ -1152,6 +1190,11 @@ gr:hasISICv4 rdf:type owl:DatatypeProperty ;
 Note: While ISIC codes are sometimes misused for classifying products or services, they are designed and suited only for classifying business establishments."""@en ;
              rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
              rdfs:label "has ISIC v4 (0..*)"@en .
+
+
+###  http://purl.org/goodrelations/v1#hasLicence
+gr:hasLicence rdf:type owl:DatatypeProperty ;
+              rdfs:range xsd:string .
 
 
 ###  http://purl.org/goodrelations/v1#hasMPN
@@ -1584,6 +1627,10 @@ gr:vatID rdf:type owl:DatatypeProperty ;
 <http://schema.org/productID> rdf:type owl:DatatypeProperty .
 
 
+###  http://www.w3.org/2002/07/owl#topDataProperty
+owl:topDataProperty rdfs:range xsd:string .
+
+
 #################################################################
 #    Classes
 #################################################################
@@ -1697,6 +1744,56 @@ Licenses and other proprietary specifications of access rights are also instance
 Examples: A particular offering made by Miller Rentals Ltd. says that they (1) sell Volkswagen Golf convertibles, (2) lease out a particular Ford pick-up truck, and (3) dispose car wrecks of any make and model."""@en ;
                     rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                     rdfs:label "Business function"@en .
+
+
+###  http://purl.org/goodrelations/v1#Copyright
+gr:Copyright rdf:type owl:Class ;
+             rdfs:subClassOf [ rdf:type owl:Restriction ;
+                               owl:onProperty gr:isOwnedBy ;
+                               owl:someValuesFrom <http://schema.org/Person>
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty gr:description ;
+                               owl:allValuesFrom xsd:string
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty gr:validFrom ;
+                               owl:allValuesFrom xsd:time
+                             ] .
+
+
+###  http://purl.org/goodrelations/v1#Creative_Work
+gr:Creative_Work rdf:type owl:Class ;
+                 rdfs:subClassOf gr:ProductOrServiceModel ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:hasContributors ;
+                                   owl:someValuesFrom <http://schema.org/Person>
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:hasCopyright ;
+                                   owl:someValuesFrom gr:Copyright
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:hasMusicBy ;
+                                   owl:someValuesFrom <http://schema.org/Person>
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:description ;
+                                   owl:someValuesFrom xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:hasAwards ;
+                                   owl:someValuesFrom xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:name ;
+                                   owl:someValuesFrom xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:hasLicence ;
+                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onDataRange xsd:string
+                                 ] .
 
 
 ###  http://purl.org/goodrelations/v1#DayOfWeek
