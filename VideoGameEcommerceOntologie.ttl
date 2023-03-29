@@ -299,7 +299,8 @@ gr:greaterOrEqual rdf:type owl:ObjectProperty ;
 ###  http://purl.org/goodrelations/v1#hasAddOn
 gr:hasAddOn rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf owl:topObjectProperty ;
-            rdfs:range gr:Software .
+            rdfs:range gr:Software ;
+            rdfs:comment "Other pieces of software available to customize or enhance the main software" .
 
 
 ###  http://purl.org/goodrelations/v1#hasBrand
@@ -335,13 +336,21 @@ Note: While it is possible that an entity is offering multiple types of business
 
 ###  http://purl.org/goodrelations/v1#hasContributors
 gr:hasContributors rdf:type owl:ObjectProperty ;
-                   rdfs:range <http://schema.org/Person> .
+                   rdfs:range <http://schema.org/Person> ;
+                   rdfs:comment "External people to the project who have contributed to the creation of the work" .
 
 
 ###  http://purl.org/goodrelations/v1#hasCopyright
 gr:hasCopyright rdf:type owl:ObjectProperty ;
                 rdfs:subPropertyOf owl:topObjectProperty ;
                 rdfs:range gr:Copyright .
+
+
+###  http://purl.org/goodrelations/v1#hasCountryOfOrigine
+gr:hasCountryOfOrigine rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf owl:topObjectProperty ;
+                       rdfs:range gr:Country ;
+                       rdfs:comment "The country in which the creation process initiated" .
 
 
 ###  http://purl.org/goodrelations/v1#hasEligibleQuantity
@@ -415,7 +424,8 @@ gr:hasMinimumSystemRequirements rdf:type owl:ObjectProperty ;
 
 ###  http://purl.org/goodrelations/v1#hasMusicBy
 gr:hasMusicBy rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf owl:topObjectProperty .
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:comment "The entity which composed and recorded the music for the work if any" .
 
 
 ###  http://purl.org/goodrelations/v1#hasNext
@@ -517,7 +527,7 @@ gr:hasRecommendedSystemRequirement rdf:type owl:ObjectProperty ;
 gr:hasSonsors rdf:type owl:ObjectProperty ;
               rdfs:range <http://schema.org/Organization> ,
                          <http://schema.org/Person> ;
-              rdfs:comment "The list of person that sponsorized the work" .
+              rdfs:comment "People supporting the project not only financially" .
 
 
 ###  http://purl.org/goodrelations/v1#hasSystemRequirement
@@ -626,7 +636,8 @@ gr:isFrom rdf:type owl:ObjectProperty ;
 ###  http://purl.org/goodrelations/v1#isOwnedBy
 gr:isOwnedBy rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf owl:topObjectProperty ;
-             owl:inverseOf gr:owns .
+             owl:inverseOf gr:owns ;
+             rdfs:comment "The entitled entity for holding the right" .
 
 
 ###  http://purl.org/goodrelations/v1#isSimilarTo
@@ -820,7 +831,8 @@ gr:valueReference rdf:type owl:ObjectProperty ;
 gr:wasDevelopedBy rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf owl:topObjectProperty ;
                   rdfs:range <http://schema.org/Organization> ,
-                             <http://schema.org/Person> .
+                             <http://schema.org/Person> ;
+                  rdfs:comment "A person or a group of people that developed the software" .
 
 
 ###  http://purl.org/goodrelations/v1#wasFounedBy
@@ -828,14 +840,15 @@ gr:wasFounedBy rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf owl:topObjectProperty ;
                rdfs:range <http://schema.org/Organization> ,
                           <http://schema.org/Person> ;
-               rdfs:comment "This entiry was founded by someone" .
+               rdfs:comment "People funding the project" .
 
 
 ###  http://purl.org/goodrelations/v1#wasPublishedBy
 gr:wasPublishedBy rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf owl:topObjectProperty ;
                   rdfs:range <http://schema.org/Organization> ,
-                             <http://schema.org/Person> .
+                             <http://schema.org/Person> ;
+                  rdfs:comment "A person or company that published the software (stockholder)" .
 
 
 ###  http://purl.org/goodrelations/v1#weight
@@ -1135,7 +1148,8 @@ Important: Do NOT use 3-letter ISO 3166-1 codes!"""@en ;
 
 ###  http://purl.org/goodrelations/v1#hasAccessConditions
 gr:hasAccessConditions rdf:type owl:DatatypeProperty ;
-                       rdfs:subPropertyOf owl:topDataProperty .
+                       rdfs:subPropertyOf owl:topDataProperty ;
+                       rdfs:comment "Conditions required to access the work (e.g. purchase, subscription, etc)" .
 
 
 ###  http://purl.org/goodrelations/v1#hasAchievements
@@ -1143,24 +1157,27 @@ gr:hasAchievements rdf:type owl:DatatypeProperty ;
                    rdfs:subPropertyOf owl:topDataProperty ;
                    rdfs:domain gr:VideoGame ;
                    rdfs:range xsd:string ;
-                   rdfs:comment "A list of challenges that are validated by achieving particular actions in the game." .
+                   rdfs:comment "A list of challenges that are validated by achieving particular actions in the game (generally platform-specific)" .
 
 
 ###  http://purl.org/goodrelations/v1#hasAvailableLanguage
 gr:hasAvailableLanguage rdf:type owl:DatatypeProperty ;
                         rdfs:subPropertyOf owl:topDataProperty ;
-                        rdfs:range xsd:string .
+                        rdfs:range xsd:string ;
+                        rdfs:comment "Languages that the software is available in (UI only)" .
 
 
 ###  http://purl.org/goodrelations/v1#hasAwards
 gr:hasAwards rdf:type owl:DatatypeProperty ;
-             rdfs:subPropertyOf owl:topDataProperty .
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:comment "The awards won by the work" .
 
 
 ###  http://purl.org/goodrelations/v1#hasCPU
 gr:hasCPU rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf gr:hasSystemDescription ;
-          rdfs:range xsd:string .
+          rdfs:range xsd:string ;
+          rdfs:comment "A CPU model" .
 
 
 ###  http://purl.org/goodrelations/v1#hasCriteria
@@ -1211,13 +1228,22 @@ gr:hasDUNS rdf:type owl:DatatypeProperty ;
 ###  http://purl.org/goodrelations/v1#hasDependencies
 gr:hasDependencies rdf:type owl:DatatypeProperty ;
                    rdfs:subPropertyOf owl:topDataProperty ;
-                   rdfs:range xsd:string .
+                   rdfs:range xsd:string ;
+                   rdfs:comment "Libraries or other softwares required for the operation of the software" .
 
 
 ###  http://purl.org/goodrelations/v1#hasDistributionCopy
 gr:hasDistributionCopy rdf:type owl:DatatypeProperty ;
                        rdfs:subPropertyOf owl:topDataProperty ;
-                       rdfs:range xsd:string .
+                       rdfs:range xsd:string ;
+                       rdfs:comment "Physical or digital copy" .
+
+
+###  http://purl.org/goodrelations/v1#hasDubLanguage
+gr:hasDubLanguage rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "Alternative audio languages if any" .
 
 
 ###  http://purl.org/goodrelations/v1#hasEAN_UCC-13
@@ -1241,13 +1267,15 @@ Note 2: As of January 1, 2007, the former ISBN numbers for books etc. have been 
 ###  http://purl.org/goodrelations/v1#hasEULARules
 gr:hasEULARules rdf:type owl:DatatypeProperty ;
                 rdfs:subPropertyOf owl:topDataProperty ;
-                rdfs:range xsd:string .
+                rdfs:range xsd:string ;
+                rdfs:comment "End-user license agreement" .
 
 
 ###  http://purl.org/goodrelations/v1#hasGPU
 gr:hasGPU rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf gr:hasSystemDescription ;
-          rdfs:range xsd:string .
+          rdfs:range xsd:string ;
+          rdfs:comment "A GPU model" .
 
 
 ###  http://purl.org/goodrelations/v1#hasGTIN-14
@@ -1285,7 +1313,7 @@ gr:hasGameMode rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf owl:topDataProperty ;
                rdfs:domain gr:VideoGame ;
                rdfs:range xsd:string ;
-               rdfs:comment "All the ways a player can play in the game. They can play with other player, alone, on a local server." .
+               rdfs:comment "All the ways a player can play a game" .
 
 
 ###  http://purl.org/goodrelations/v1#hasGlobalLocationNumber
@@ -1326,12 +1354,13 @@ gr:hasInput rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf owl:topDataProperty ;
             rdfs:domain gr:VideoGame ;
             rdfs:range xsd:string ;
-            rdfs:comment "All the hardware that has to be connected to play properly.For instance: the keyboard, the mouse …" .
+            rdfs:comment "All the hardware that is supported for playing the game." .
 
 
 ###  http://purl.org/goodrelations/v1#hasLicence
 gr:hasLicence rdf:type owl:DatatypeProperty ;
-              rdfs:range xsd:string .
+              rdfs:range xsd:string ;
+              rdfs:comment "The associated to the work" .
 
 
 ###  http://purl.org/goodrelations/v1#hasMPN
@@ -1456,31 +1485,36 @@ Note: While NAICS codes are sometimes misused for classifying products or servic
 ###  http://purl.org/goodrelations/v1#hasNetwork
 gr:hasNetwork rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf gr:hasSystemDescription ;
-              rdfs:range xsd:string .
+              rdfs:range xsd:string ;
+              rdfs:comment "Networking capability" .
 
 
 ###  http://purl.org/goodrelations/v1#hasOS
 gr:hasOS rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf gr:hasSystemDescription ;
-         rdfs:range xsd:string .
+         rdfs:range xsd:string ;
+         rdfs:comment "A major OS" .
 
 
 ###  http://purl.org/goodrelations/v1#hasPermissions
 gr:hasPermissions rdf:type owl:DatatypeProperty ;
                   rdfs:subPropertyOf owl:topDataProperty ;
-                  rdfs:range xsd:string .
+                  rdfs:range xsd:string ;
+                  rdfs:comment "Required permissions on a device to run flawlessly, such as network access" .
 
 
 ###  http://purl.org/goodrelations/v1#hasPlateforme
 gr:hasPlateforme rdf:type owl:DatatypeProperty ;
                  rdfs:subPropertyOf owl:topDataProperty ;
-                 rdfs:range xsd:string .
+                 rdfs:range xsd:string ;
+                 rdfs:comment "The targeted platform e.g. Windows desktop, SteamDeck, etc" .
 
 
 ###  http://purl.org/goodrelations/v1#hasRAM
 gr:hasRAM rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf gr:hasSystemDescription ;
-          rdfs:range xsd:integer .
+          rdfs:range xsd:integer ;
+          rdfs:comment "Amount of RAM in GB" .
 
 
 ###  http://purl.org/goodrelations/v1#hasRating
@@ -1494,13 +1528,15 @@ gr:hasRating rdf:type owl:DatatypeProperty ;
 ###  http://purl.org/goodrelations/v1#hasReleaseDate
 gr:hasReleaseDate rdf:type owl:DatatypeProperty ;
                   rdfs:subPropertyOf owl:topDataProperty ;
-                  rdfs:range xsd:time .
+                  rdfs:range xsd:time ;
+                  rdfs:comment "Date of release of the software" .
 
 
 ###  http://purl.org/goodrelations/v1#hasReleaseNotes
 gr:hasReleaseNotes rdf:type owl:DatatypeProperty ;
                    rdfs:subPropertyOf owl:topDataProperty ;
-                   rdfs:range xsd:string .
+                   rdfs:range xsd:string ;
+                   rdfs:comment "Notes and comments made by the developers about a software version" .
 
 
 ###  http://purl.org/goodrelations/v1#hasStatus
@@ -1540,7 +1576,14 @@ See also http://en.wikipedia.org/wiki/Stock_Keeping_Unit."""@en ;
 ###  http://purl.org/goodrelations/v1#hasStorage
 gr:hasStorage rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf gr:hasSystemDescription ;
-              rdfs:range xsd:integer .
+              rdfs:range xsd:integer ;
+              rdfs:comment "Amount of space (estimated to be) taken up by the software in GB" .
+
+
+###  http://purl.org/goodrelations/v1#hasSubLanguage
+gr:hasSubLanguage rdf:type owl:DatatypeProperty ;
+                  rdfs:range xsd:string ;
+                  rdfs:comment "Subtitle languages if any" .
 
 
 ###  http://purl.org/goodrelations/v1#hasSystemDescription
@@ -1600,27 +1643,28 @@ gr:hasValueInteger rdf:type owl:DatatypeProperty ;
 ###  http://purl.org/goodrelations/v1#hasVersion
 gr:hasVersion rdf:type owl:DatatypeProperty ;
               rdfs:domain gr:Software ;
-              rdfs:range xsd:string .
+              rdfs:range xsd:string ;
+              rdfs:comment "The available versions of the software" .
 
 
 ###  http://purl.org/goodrelations/v1#isFree
 gr:isFree rdf:type owl:DatatypeProperty ;
           rdfs:range xsd:boolean ;
-          rdfs:comment "Rather or not the art is free" .
+          rdfs:comment "Whether the content is freely accessible by anyone" .
 
 
 ###  http://purl.org/goodrelations/v1#isFromFranchise
 gr:isFromFranchise rdf:type owl:DatatypeProperty ;
                    rdfs:subPropertyOf owl:topDataProperty ;
                    rdfs:range xsd:string ;
-                   rdfs:comment "Is part of a list of same games" .
+                   rdfs:comment "The main title of a series of games (e.g. Age of Empires)" .
 
 
 ###  http://purl.org/goodrelations/v1#isFromGenre
 gr:isFromGenre rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf owl:topDataProperty ;
                rdfs:range xsd:string ;
-               rdfs:comment "Type of the game. Infer the kind of gameplay. It can be for instance : adventure, action." .
+               rdfs:comment "The type of the game, which can infer the kind of gameplay (e.g. action ,adventure)" .
 
 
 ###  http://purl.org/goodrelations/v1#isListPrice
@@ -2020,7 +2064,11 @@ gr:Copyright rdf:type owl:Class ;
 
 
 ###  http://purl.org/goodrelations/v1#Country
-gr:Country rdf:type owl:Class .
+gr:Country rdf:type owl:Class ;
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty gr:hasDubLanguage ;
+                             owl:someValuesFrom xsd:string
+                           ] .
 
 
 ###  http://purl.org/goodrelations/v1#Creative_Work
@@ -2037,6 +2085,10 @@ gr:Creative_Work rdf:type owl:Class ;
                                  [ rdf:type owl:Restriction ;
                                    owl:onProperty gr:hasCopyright ;
                                    owl:someValuesFrom gr:Copyright
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:hasCountryOfOrigine ;
+                                   owl:someValuesFrom gr:Country
                                  ] ,
                                  [ rdf:type owl:Restriction ;
                                    owl:onProperty gr:hasMusicBy ;
@@ -2071,11 +2123,23 @@ gr:Creative_Work rdf:type owl:Class ;
                                    owl:someValuesFrom xsd:string
                                  ] ,
                                  [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:hasAccessConditions ;
+                                   owl:someValuesFrom xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
                                    owl:onProperty gr:hasAwards ;
                                    owl:someValuesFrom xsd:string
                                  ] ,
                                  [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:hasDubLanguage ;
+                                   owl:someValuesFrom xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
                                    owl:onProperty gr:hasStatus ;
+                                   owl:someValuesFrom xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:hasSubLanguage ;
                                    owl:someValuesFrom xsd:string
                                  ] ,
                                  [ rdf:type owl:Restriction ;
@@ -2106,7 +2170,8 @@ gr:Creative_Work rdf:type owl:Class ;
                                    owl:onProperty gr:wasPublished ;
                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                    owl:onDataRange xsd:time
-                                 ] .
+                                 ] ;
+                 rdfs:comment "The most generic kind of create work, including books, photographs, movies, software programs, etc" .
 
 
 ###  http://purl.org/goodrelations/v1#DayOfWeek
@@ -2179,6 +2244,18 @@ Examples: UPS, DHL"""@en ;
 
 ###  http://purl.org/goodrelations/v1#GamePlay
 gr:GamePlay rdf:type owl:Class ;
+            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:hasAchievements ;
+                              owl:someValuesFrom xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:hasGameMode ;
+                              owl:someValuesFrom xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty gr:hasInput ;
+                              owl:someValuesFrom xsd:string
+                            ] ;
             rdfs:comment "Elements related to how the game is played; input methods, game modes and if achievements are available or not" .
 
 
@@ -2291,6 +2368,15 @@ gr:OpeningHoursSpecification rdf:type owl:Class ;
 
 ###  http://purl.org/goodrelations/v1#PEGI
 gr:PEGI rdf:type owl:Class ;
+        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                          owl:onProperty gr:hasCriteria ;
+                          owl:someValuesFrom xsd:string
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty gr:hasRating ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onDataRange xsd:double
+                        ] ;
         rdfs:comment "A system with 6 age categories and 8 content descriptors to indicate if a certain video game is appropriate for children of a certain age" .
 
 
