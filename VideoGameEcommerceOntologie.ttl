@@ -101,6 +101,14 @@ xsd:time rdf:type rdfs:Datatype .
 #    Object Properties
 #################################################################
 
+###  http://purl.org/goodrelations/v1#AvailableAtorFrom
+gr:AvailableAtorFrom rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf owl:topObjectProperty ;
+                     rdfs:domain gr:Offering ;
+                     rdfs:range gr:AvailableAtOrFrom ;
+                     rdfs:comment "shop (online or physical) that the offering can be accessed for purchase" .
+
+
 ###  http://purl.org/goodrelations/v1#acceptedPaymentMethods
 gr:acceptedPaymentMethods rdf:type owl:ObjectProperty ;
                           rdfs:domain [ rdf:type owl:Class ;
@@ -477,6 +485,14 @@ gr:hasPOS rdf:type owl:ObjectProperty ;
           rdfs:comment "This property states that the respective gr:Location is a point of sale for the respective gr:BusinessEntity. It allows linking those two types of entities without the need for a particular gr:Offering."@en ;
           rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
           rdfs:label "has POS (0..*)"@en .
+
+
+###  http://purl.org/goodrelations/v1#hasPaymentMethod
+gr:hasPaymentMethod rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty ;
+                    rdfs:domain gr:AcceptedPayment ;
+                    rdfs:range gr:PaymentMethod ;
+                    rdfs:comment "The payment method" .
 
 
 ###  http://purl.org/goodrelations/v1#hasPegi
@@ -1180,6 +1196,13 @@ gr:hasCPU rdf:type owl:DatatypeProperty ;
           rdfs:comment "A CPU model" .
 
 
+###  http://purl.org/goodrelations/v1#hasCondition
+gr:hasCondition rdf:type owl:DatatypeProperty ;
+                rdfs:domain gr:DeliveryMethod ;
+                rdfs:range xsd:string ;
+                rdfs:comment "textual description of conditions of delivery" .
+
+
 ###  http://purl.org/goodrelations/v1#hasCriteria
 gr:hasCriteria rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf owl:topDataProperty ;
@@ -1223,6 +1246,14 @@ gr:hasDUNS rdf:type owl:DatatypeProperty ;
            rdfs:comment "The Dun & Bradstreet DUNS number for identifying a gr:BusinessEntity. The Dun & Bradstreet DUNS is a nine-digit number used to identify legal entities (but usually not branches or locations of logistical importance only)."@en ;
            rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
            rdfs:label "has DUNS (0..1)"@en .
+
+
+###  http://purl.org/goodrelations/v1#hasDeliveryCost
+gr:hasDeliveryCost rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain gr:DeliveryMethod ;
+                   rdfs:range xsd:float ;
+                   rdfs:comment "how much it costs to deliver the product" .
 
 
 ###  http://purl.org/goodrelations/v1#hasDependencies
@@ -1363,6 +1394,13 @@ gr:hasLicence rdf:type owl:DatatypeProperty ;
               rdfs:comment "The associated to the work" .
 
 
+###  http://purl.org/goodrelations/v1#hasLocation
+gr:hasLocation rdf:type owl:DatatypeProperty ;
+               rdfs:domain gr:AvailableAtOrFrom ;
+               rdfs:range xsd:string ;
+               rdfs:comment "URL or Physical Address of where the product can be bought from" .
+
+
 ###  http://purl.org/goodrelations/v1#hasMPN
 gr:hasMPN rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf <http://schema.org/productID> ;
@@ -1394,6 +1432,13 @@ For a gr:UnitPriceSpecification, this is the UPPER BOUND for the price for one u
 Using gr:hasCurrencyValue sets the upper and lower bounds to the same given value, i.e., x gr:hasCurrencyValue y implies x gr:hasMinCurrencyValue y, x gr:hasMaxCurrencyValue y."""@en ;
                        rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                        rdfs:label "has max currency value (1..1)"@en .
+
+
+###  http://purl.org/goodrelations/v1#hasMaxPaymentValue
+gr:hasMaxPaymentValue rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf owl:topDataProperty ;
+                      rdfs:range xsd:double ;
+                      rdfs:comment "Max value per payment in euros" .
 
 
 ###  http://purl.org/goodrelations/v1#hasMaxValue
@@ -1435,6 +1480,13 @@ For a gr:UnitPriceSpecification, this is the LOWER BOUND for the price for one u
 Using gr:hasCurrencyValue sets the upper and lower bounds to the same given value, i.e., x gr:hasCurrencyValue y implies x gr:hasMinCurrencyValue y, x gr:hasMaxCurrencyValue y."""@en ;
                        rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                        rdfs:label "has min currency value (1..1)"@en .
+
+
+###  http://purl.org/goodrelations/v1#hasMinPaymentValue
+gr:hasMinPaymentValue rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf owl:topDataProperty ;
+                      rdfs:range xsd:double ;
+                      rdfs:comment "Minimal value per payment in euros" .
 
 
 ###  http://purl.org/goodrelations/v1#hasMinValue
@@ -1496,6 +1548,13 @@ gr:hasOS rdf:type owl:DatatypeProperty ;
          rdfs:comment "A major OS" .
 
 
+###  http://purl.org/goodrelations/v1#hasPaymentMethodFrequency
+gr:hasPaymentMethodFrequency rdf:type owl:DatatypeProperty ;
+                             rdfs:subPropertyOf owl:topDataProperty ;
+                             rdfs:range xsd:int ;
+                             rdfs:comment "Number of months before the reset of the total payement cost" .
+
+
 ###  http://purl.org/goodrelations/v1#hasPermissions
 gr:hasPermissions rdf:type owl:DatatypeProperty ;
                   rdfs:subPropertyOf owl:topDataProperty ;
@@ -1537,6 +1596,14 @@ gr:hasReleaseNotes rdf:type owl:DatatypeProperty ;
                    rdfs:subPropertyOf owl:topDataProperty ;
                    rdfs:range xsd:string ;
                    rdfs:comment "Notes and comments made by the developers about a software version" .
+
+
+###  http://purl.org/goodrelations/v1#hasSerialNumber
+gr:hasSerialNumber rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain gr:ProductOrServiceModel ;
+                   rdfs:range xsd:long ;
+                   rdfs:comment "A unique number assigned to the purchase of a product" .
 
 
 ###  http://purl.org/goodrelations/v1#hasStatus
@@ -1867,6 +1934,13 @@ Note 2: For Google, attaching a gr:validThrough statement to a gr:UnitPriceSpeci
                 rdfs:label "valid through (0..1)"@en .
 
 
+###  http://purl.org/goodrelations/v1#validTrough
+gr:validTrough rdf:type owl:DatatypeProperty ;
+               rdfs:domain gr:AcceptedPayment ;
+               rdfs:range xsd:dateTime ;
+               rdfs:comment "): if the payment is divided, it specifies the date range that is valid." .
+
+
 ###  http://purl.org/goodrelations/v1#valueAddedTaxIncluded
 gr:valueAddedTaxIncluded rdf:type owl:DatatypeProperty ;
                          rdfs:domain gr:PriceSpecification ;
@@ -1925,12 +1999,37 @@ gr:wasPublished rdf:type owl:DatatypeProperty ;
 
 
 ###  http://www.w3.org/2002/07/owl#topDataProperty
-owl:topDataProperty rdfs:range xsd:string .
+owl:topDataProperty rdfs:range xsd:double .
 
 
 #################################################################
 #    Classes
 #################################################################
+
+###  http://purl.org/goodrelations/v1#AcceptedPayment
+gr:AcceptedPayment rdf:type owl:Class ;
+                   rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                     owl:onProperty gr:hasPaymentMethod ;
+                                     owl:someValuesFrom gr:PaymentMethod
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gr:hasMaxPaymentValue ;
+                                     owl:someValuesFrom xsd:double
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gr:hasMinPaymentValue ;
+                                     owl:someValuesFrom xsd:double
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gr:hasPaymentMethodFrequency ;
+                                     owl:someValuesFrom xsd:int
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gr:validTrough ;
+                                     owl:someValuesFrom xsd:dateTime
+                                   ] ;
+                   rdfs:comment "Accepted payment methods of the offering and the time and value that this payment can be completed" .
+
 
 ###  http://purl.org/goodrelations/v1#ActualProductOrServiceInstance
 gr:ActualProductOrServiceInstance rdf:type owl:Class ;
@@ -1940,6 +2039,15 @@ gr:ActualProductOrServiceInstance rdf:type owl:Class ;
                                   rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                                   rdfs:label "Actual product or service instance (DEPRECATED)"@en ;
                                   owl:deprecated "true"^^xsd:boolean .
+
+
+###  http://purl.org/goodrelations/v1#AvailableAtOrFrom
+gr:AvailableAtOrFrom rdf:type owl:Class ;
+                     rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                       owl:onProperty gr:hasLocation ;
+                                       owl:someValuesFrom xsd:string
+                                     ] ;
+                     rdfs:comment "shop (online or physical) that the offering can be accessed for purchase" .
 
 
 ###  http://purl.org/goodrelations/v1#Brand
@@ -2215,6 +2323,14 @@ Important: When querying for the price, always use gr:hasMaxCurrencyValue and gr
 
 ###  http://purl.org/goodrelations/v1#DeliveryMethod
 gr:DeliveryMethod rdf:type owl:Class ;
+                  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                    owl:onProperty gr:hasCondition ;
+                                    owl:someValuesFrom xsd:string
+                                  ] ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty gr:hasDeliveryCost ;
+                                    owl:someValuesFrom xsd:float
+                                  ] ;
                   owl:disjointWith gr:Location ,
                                    gr:Offering ,
                                    gr:OpeningHoursSpecification ,
@@ -2755,7 +2871,19 @@ Examples: Parts and Labor, Parts"""@en ;
 
 ###  http://schema.org/Offer
 <http://schema.org/Offer> rdf:type owl:Class ;
-                          rdfs:subClassOf gr:Offering .
+                          rdfs:subClassOf gr:Offering ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:availableDeliveryMethods ;
+                                            owl:someValuesFrom gr:DeliveryMethod
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:category ;
+                                            owl:someValuesFrom xsd:string
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:hasSerialNumber ;
+                                            owl:someValuesFrom xsd:long
+                                          ] .
 
 
 ###  http://schema.org/Organization
