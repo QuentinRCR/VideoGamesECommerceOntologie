@@ -311,6 +311,20 @@ gr:hasAddOn rdf:type owl:ObjectProperty ;
             rdfs:comment "Other pieces of software available to customize or enhance the main software" .
 
 
+###  http://purl.org/goodrelations/v1#hasAdvertisement
+gr:hasAdvertisement rdf:type owl:ObjectProperty ;
+                    rdfs:range gr:Advertisement ;
+                    rdfs:comment "All the advertisement actions" .
+
+
+###  http://purl.org/goodrelations/v1#hasAvailabilityDuration
+gr:hasAvailabilityDuration rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf owl:topObjectProperty ;
+                           rdfs:domain gr:Offering ;
+                           rdfs:range gr:AvailabilityDuration ;
+                           rdfs:comment "duration of availability of an offer" .
+
+
 ###  http://purl.org/goodrelations/v1#hasBrand
 gr:hasBrand rdf:type owl:ObjectProperty ;
             rdfs:domain [ rdf:type owl:Class ;
@@ -361,6 +375,18 @@ gr:hasCountryOfOrigine rdf:type owl:ObjectProperty ;
                        rdfs:comment "The country in which the creation process initiated" .
 
 
+###  http://purl.org/goodrelations/v1#hasDeliveryCharge
+gr:hasDeliveryCharge rdf:type owl:ObjectProperty ;
+                     rdfs:range gr:DeliveryChargeSpecification ;
+                     rdfs:comment "Cost of delivery if any" .
+
+
+###  http://purl.org/goodrelations/v1#hasDeliveryLeadTime
+gr:hasDeliveryLeadTime rdf:type owl:ObjectProperty ;
+                       rdfs:range gr:Delivery_Lead_Time ;
+                       rdfs:comment "Specifies the time that the product can be processed to be delivered right after the purchase" .
+
+
 ###  http://purl.org/goodrelations/v1#hasEligibleQuantity
 gr:hasEligibleQuantity rdf:type owl:ObjectProperty ;
                        rdfs:domain [ rdf:type owl:Class ;
@@ -384,12 +410,7 @@ gr:hasInventoryLevel rdf:type owl:ObjectProperty ;
                                                  <http://schema.org/Offer>
                                                )
                                  ] ;
-                     rdfs:range gr:QuantitativeValueFloat ;
-                     rdfs:comment """This property specifies the current approximate inventory level for gr:SomeItems. The unit of measurement and the point value or interval are indicated using the attached gr:QuantitativeValueFloat instance.
-
-This property can also be attached to a gr:Offering in cases where the included products are not modeled in more detail."""@en ;
-                     rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
-                     rdfs:label "has inventory level (0..1)"@en .
+                     rdfs:range gr:QuantitativeValueFloat .
 
 
 ###  http://purl.org/goodrelations/v1#hasMakeAndModel
@@ -919,6 +940,12 @@ foaf:depiction rdf:type owl:ObjectProperty .
 #    Data properties
 #################################################################
 
+###  http://purl.org/goodrelations/v1#Reviews
+gr:Reviews rdf:type owl:DatatypeProperty ;
+           rdfs:range xsd:string ;
+           rdfs:comment "Written feedbacks by a customers" .
+
+
 ###  http://purl.org/goodrelations/v1#amountOfThisGood
 gr:amountOfThisGood rdf:type owl:DatatypeProperty ;
                     rdfs:domain gr:TypeAndQuantityNode ;
@@ -1176,6 +1203,13 @@ gr:hasAchievements rdf:type owl:DatatypeProperty ;
                    rdfs:comment "A list of challenges that are validated by achieving particular actions in the game (generally platform-specific)" .
 
 
+###  http://purl.org/goodrelations/v1#hasArticles
+gr:hasArticles rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
+               rdfs:range xsd:anyURI ;
+               rdfs:comment "Articles to present a product" .
+
+
 ###  http://purl.org/goodrelations/v1#hasAvailableLanguage
 gr:hasAvailableLanguage rdf:type owl:DatatypeProperty ;
                         rdfs:subPropertyOf owl:topDataProperty ;
@@ -1233,6 +1267,13 @@ GoodRelations also supports giving price information as intervals only. If this 
 Using gr:hasCurrencyValue sets the upper and lower bounds to the same given value, i.e., x gr:hasCurrencyValue y implies x gr:hasMinCurrencyValue y, x gr:hasMaxCurrencyValue y."""@en ;
                     rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                     rdfs:label "has currency value (0..1)"@en .
+
+
+###  http://purl.org/goodrelations/v1#hasCustomerRequirement
+gr:hasCustomerRequirement rdf:type owl:DatatypeProperty ;
+                          rdfs:domain gr:Offering ;
+                          rdfs:range xsd:string ;
+                          rdfs:comment "Specifies what are the requirements for a customer to be eligible to buy the product, specifying age range or health conditions to access the product etc." .
 
 
 ###  http://purl.org/goodrelations/v1#hasDUNS
@@ -1300,6 +1341,13 @@ gr:hasEULARules rdf:type owl:DatatypeProperty ;
                 rdfs:subPropertyOf owl:topDataProperty ;
                 rdfs:range xsd:string ;
                 rdfs:comment "End-user license agreement" .
+
+
+###  http://purl.org/goodrelations/v1#hasEvents
+gr:hasEvents rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:range xsd:string ;
+             rdfs:comment "Events to showcase a product" .
 
 
 ###  http://purl.org/goodrelations/v1#hasGPU
@@ -1388,6 +1436,17 @@ gr:hasInput rdf:type owl:DatatypeProperty ;
             rdfs:comment "All the hardware that is supported for playing the game." .
 
 
+###  http://purl.org/goodrelations/v1#hasInterviews
+gr:hasInterviews rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdfs:range xsd:anyURI ;
+                 rdfs:comment "Interviews of the someone to promote a product" .
+
+
+###  http://purl.org/goodrelations/v1#hasInventoryLevel
+gr:hasInventoryLevel rdf:type owl:DatatypeProperty .
+
+
 ###  http://purl.org/goodrelations/v1#hasLicence
 gr:hasLicence rdf:type owl:DatatypeProperty ;
               rdfs:range xsd:string ;
@@ -1434,13 +1493,6 @@ Using gr:hasCurrencyValue sets the upper and lower bounds to the same given valu
                        rdfs:label "has max currency value (1..1)"@en .
 
 
-###  http://purl.org/goodrelations/v1#hasMaxPaymentValue
-gr:hasMaxPaymentValue rdf:type owl:DatatypeProperty ;
-                      rdfs:subPropertyOf owl:topDataProperty ;
-                      rdfs:range xsd:double ;
-                      rdfs:comment "Max value per payment in euros" .
-
-
 ###  http://purl.org/goodrelations/v1#hasMaxValue
 gr:hasMaxValue rdf:type owl:DatatypeProperty ;
                rdfs:domain gr:QuantitativeValue ;
@@ -1480,13 +1532,6 @@ For a gr:UnitPriceSpecification, this is the LOWER BOUND for the price for one u
 Using gr:hasCurrencyValue sets the upper and lower bounds to the same given value, i.e., x gr:hasCurrencyValue y implies x gr:hasMinCurrencyValue y, x gr:hasMaxCurrencyValue y."""@en ;
                        rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                        rdfs:label "has min currency value (1..1)"@en .
-
-
-###  http://purl.org/goodrelations/v1#hasMinPaymentValue
-gr:hasMinPaymentValue rdf:type owl:DatatypeProperty ;
-                      rdfs:subPropertyOf owl:topDataProperty ;
-                      rdfs:range xsd:double ;
-                      rdfs:comment "Minimal value per payment in euros" .
 
 
 ###  http://purl.org/goodrelations/v1#hasMinValue
@@ -1569,6 +1614,13 @@ gr:hasPlateforme rdf:type owl:DatatypeProperty ;
                  rdfs:comment "The targeted platform e.g. Windows desktop, SteamDeck, etc" .
 
 
+###  http://purl.org/goodrelations/v1#hasPriceType
+gr:hasPriceType rdf:type owl:DatatypeProperty ;
+                rdfs:domain gr:UnitPriceSpecification ;
+                rdfs:range xsd:string ;
+                rdfs:comment "Type of price modifier" .
+
+
 ###  http://purl.org/goodrelations/v1#hasRAM
 gr:hasRAM rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf gr:hasSystemDescription ;
@@ -1596,6 +1648,13 @@ gr:hasReleaseNotes rdf:type owl:DatatypeProperty ;
                    rdfs:subPropertyOf owl:topDataProperty ;
                    rdfs:range xsd:string ;
                    rdfs:comment "Notes and comments made by the developers about a software version" .
+
+
+###  http://purl.org/goodrelations/v1#hasSaleStatus
+gr:hasSaleStatus rdf:type owl:DatatypeProperty ;
+                 rdfs:domain gr:UnitPriceSpecification ;
+                 rdfs:range xsd:float ;
+                 rdfs:comment "Promotion percentage" .
 
 
 ###  http://purl.org/goodrelations/v1#hasSerialNumber
@@ -1660,6 +1719,12 @@ gr:hasSystemDescription rdf:type owl:DatatypeProperty ;
                         rdfs:comment "Minimum system requirements to be able to launch the software" .
 
 
+###  http://purl.org/goodrelations/v1#hasTags
+gr:hasTags rdf:type owl:DatatypeProperty ;
+           rdfs:range xsd:string ;
+           rdfs:comment "Unique words qualifying a product of an offer" .
+
+
 ###  http://purl.org/goodrelations/v1#hasUnitOfMeasurement
 gr:hasUnitOfMeasurement rdf:type owl:DatatypeProperty ;
                         rdfs:domain [ rdf:type owl:Class ;
@@ -1712,6 +1777,20 @@ gr:hasVersion rdf:type owl:DatatypeProperty ;
               rdfs:domain gr:Software ;
               rdfs:range xsd:string ;
               rdfs:comment "The available versions of the software" .
+
+
+###  http://purl.org/goodrelations/v1#hasVideoPresentation
+gr:hasVideoPresentation rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf owl:topDataProperty ;
+                        rdfs:range xsd:anyURI ;
+                        rdfs:comment "Video advertising a product/offer" .
+
+
+###  http://purl.org/goodrelations/v1#isAvailableInRegions
+gr:isAvailableInRegions rdf:type owl:DatatypeProperty ;
+                        rdfs:domain gr:Offering ;
+                        rdfs:range xsd:string ;
+                        rdfs:comment "Specifies the geo-political region or regions for which the Offering is valid using the two-character version of ISO 3166-1 (ISO 3166-1 alpha-2) for regions or ISO 3166-2." .
 
 
 ###  http://purl.org/goodrelations/v1#isFree
@@ -1934,13 +2013,6 @@ Note 2: For Google, attaching a gr:validThrough statement to a gr:UnitPriceSpeci
                 rdfs:label "valid through (0..1)"@en .
 
 
-###  http://purl.org/goodrelations/v1#validTrough
-gr:validTrough rdf:type owl:DatatypeProperty ;
-               rdfs:domain gr:AcceptedPayment ;
-               rdfs:range xsd:dateTime ;
-               rdfs:comment "): if the payment is divided, it specifies the date range that is valid." .
-
-
 ###  http://purl.org/goodrelations/v1#valueAddedTaxIncluded
 gr:valueAddedTaxIncluded rdf:type owl:DatatypeProperty ;
                          rdfs:domain gr:PriceSpecification ;
@@ -1999,7 +2071,8 @@ gr:wasPublished rdf:type owl:DatatypeProperty ;
 
 
 ###  http://www.w3.org/2002/07/owl#topDataProperty
-owl:topDataProperty rdfs:range xsd:double .
+owl:topDataProperty rdfs:domain gr:Offering ;
+                    rdfs:range xsd:double .
 
 
 #################################################################
@@ -2013,20 +2086,22 @@ gr:AcceptedPayment rdf:type owl:Class ;
                                      owl:someValuesFrom gr:PaymentMethod
                                    ] ,
                                    [ rdf:type owl:Restriction ;
-                                     owl:onProperty gr:hasMaxPaymentValue ;
-                                     owl:someValuesFrom xsd:double
-                                   ] ,
-                                   [ rdf:type owl:Restriction ;
-                                     owl:onProperty gr:hasMinPaymentValue ;
-                                     owl:someValuesFrom xsd:double
-                                   ] ,
-                                   [ rdf:type owl:Restriction ;
                                      owl:onProperty gr:hasPaymentMethodFrequency ;
                                      owl:someValuesFrom xsd:int
                                    ] ,
                                    [ rdf:type owl:Restriction ;
-                                     owl:onProperty gr:validTrough ;
+                                     owl:onProperty gr:validThrough ;
                                      owl:someValuesFrom xsd:dateTime
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gr:hasMaxCurrencyValue ;
+                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onDataRange xsd:double
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gr:hasMinCurrencyValue ;
+                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onDataRange xsd:double
                                    ] ;
                    rdfs:comment "Accepted payment methods of the offering and the time and value that this payment can be completed" .
 
@@ -2039,6 +2114,47 @@ gr:ActualProductOrServiceInstance rdf:type owl:Class ;
                                   rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                                   rdfs:label "Actual product or service instance (DEPRECATED)"@en ;
                                   owl:deprecated "true"^^xsd:boolean .
+
+
+###  http://purl.org/goodrelations/v1#Advertisement
+gr:Advertisement rdf:type owl:Class ;
+                 rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:hasArticles ;
+                                   owl:someValuesFrom xsd:anyURI
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:hasEvents ;
+                                   owl:someValuesFrom xsd:string
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:hasInterviews ;
+                                   owl:someValuesFrom xsd:anyURI
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty gr:hasVideoPresentation ;
+                                   owl:someValuesFrom xsd:anyURI
+                                 ] ;
+                 rdfs:comment "All the advertisement actions" .
+
+
+###  http://purl.org/goodrelations/v1#AvailabilityDuration
+gr:AvailabilityDuration rdf:type owl:Class ;
+                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                          owl:onProperty gr:hasMaxValueFloat ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onDataRange xsd:float
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty gr:hasMinValueFloat ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onDataRange xsd:float
+                                        ] ,
+                                        [ rdf:type owl:Restriction ;
+                                          owl:onProperty gr:hasUnitOfMeasurement ;
+                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                          owl:onDataRange xsd:string
+                                        ] ;
+                        rdfs:comment "duration of availability of an offer" .
 
 
 ###  http://purl.org/goodrelations/v1#AvailableAtOrFrom
@@ -2282,6 +2398,24 @@ gr:Creative_Work rdf:type owl:Class ;
                  rdfs:comment "The most generic kind of create work, including books, photographs, movies, software programs, etc" .
 
 
+###  http://purl.org/goodrelations/v1#Customer_Feedback
+gr:Customer_Feedback rdf:type owl:Class ;
+                     rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                       owl:onProperty gr:Reviews ;
+                                       owl:someValuesFrom xsd:string
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty gr:hasTags ;
+                                       owl:someValuesFrom xsd:string
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty gr:hasRating ;
+                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onDataRange xsd:float
+                                     ] ;
+                     rdfs:comment "Customer-defined characteristics and evaluations of the offer" .
+
+
 ###  http://purl.org/goodrelations/v1#DayOfWeek
 gr:DayOfWeek rdf:type owl:Class ;
              owl:disjointWith gr:DeliveryMethod ,
@@ -2356,6 +2490,26 @@ gr:DeliveryModeParcelService rdf:type owl:Class ;
 Examples: UPS, DHL"""@en ;
                              rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
                              rdfs:label "Delivery mode parcel service"@en .
+
+
+###  http://purl.org/goodrelations/v1#Delivery_Lead_Time
+gr:Delivery_Lead_Time rdf:type owl:Class ;
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty gr:hasCurrencyValue ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onDataRange xsd:string
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gr:hasMaxValueFloat ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onDataRange xsd:float
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gr:hasMinValueInteger ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onDataRange xsd:float
+                                      ] ;
+                      rdfs:comment "Specifies the time that the product can be processed to be delivered right after the purchase" .
 
 
 ###  http://purl.org/goodrelations/v1#GamePlay
@@ -2540,6 +2694,16 @@ Examples: VISA, MasterCard, or American Express."""@en ;
 
 ###  http://purl.org/goodrelations/v1#PriceSpecification
 gr:PriceSpecification rdf:type owl:Class ;
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty gr:hasCurrencyValue ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onDataRange xsd:string
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gr:hasValue ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onDataRange xsd:float
+                                      ] ;
                       owl:disjointWith gr:ProductOrService ,
                                        gr:QuantitativeValue ,
                                        gr:TypeAndQuantityNode ,
@@ -2783,7 +2947,17 @@ Example: An offering may include of 100g of Butter and 1 kg of potatoes, or 1 ce
 
 ###  http://purl.org/goodrelations/v1#UnitPriceSpecification
 gr:UnitPriceSpecification rdf:type owl:Class ;
-                          rdfs:subClassOf gr:PriceSpecification ;
+                          rdfs:subClassOf gr:PriceSpecification ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:hasPriceType ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onDataRange xsd:string
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:hasSaleStatus ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onDataRange xsd:float
+                                          ] ;
                           rdfs:comment """A unit price specification is a conceptual entity that specifies the price asked for a given gr:Offering by the respective gr:Business Entity. An offering may be linked to multiple unit price specifications that specify alternative prices for non-overlapping sets of conditions (e.g. quantities or sales regions) or with differing validity periods. 
 
 A unit price specification is characterized by (1) the lower and upper limits and the unit of measurement of the eligible quantity, (2) by a monetary amount per unit of the product or service, and (3)  whether this prices includes local sales taxes, namely VAT.
@@ -2850,6 +3024,16 @@ gr:VideoGame rdf:type owl:Class ;
 
 ###  http://purl.org/goodrelations/v1#WarrantyPromise
 gr:WarrantyPromise rdf:type owl:Class ;
+                   rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                     owl:onProperty gr:hasWarrantyScope ;
+                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass gr:WarrantyScope
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gr:durationOfWarrantyInMonths ;
+                                     owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onDataRange xsd:integer
+                                   ] ;
                    owl:disjointWith gr:WarrantyScope ;
                    rdfs:comment """This is a conceptual entity that holds together all aspects of the n-ary relation gr:hasWarrantyPromise.
 
@@ -2877,12 +3061,81 @@ Examples: Parts and Labor, Parts"""@en ;
                                             owl:someValuesFrom gr:DeliveryMethod
                                           ] ,
                                           [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:hasAddOn ;
+                                            owl:someValuesFrom gr:Software
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:hasAdvertisement ;
+                                            owl:someValuesFrom gr:Advertisement
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:hasPriceSpecification ;
+                                            owl:someValuesFrom gr:PriceSpecification
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:includesObject ;
+                                            owl:someValuesFrom gr:VideoGame
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:hasAvailabilityDuration ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass gr:AvailabilityDuration
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:hasDeliveryCharge ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass gr:DeliveryChargeSpecification
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:hasDeliveryLeadTime ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass gr:Delivery_Lead_Time
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:hasWarrantyPromise ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass gr:WarrantyPromise
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
                                             owl:onProperty gr:category ;
                                             owl:someValuesFrom xsd:string
                                           ] ,
                                           [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:description ;
+                                            owl:someValuesFrom xsd:string
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:hasCustomerRequirement ;
+                                            owl:someValuesFrom xsd:string
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:isAvailableInRegions ;
+                                            owl:someValuesFrom xsd:string
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:hasInventoryLevel ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onDataRange xsd:integer
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
                                             owl:onProperty gr:hasSerialNumber ;
-                                            owl:someValuesFrom xsd:long
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onDataRange xsd:long
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:name ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onDataRange xsd:string
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:validFrom ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onDataRange xsd:dateTime
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty gr:validThrough ;
+                                            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onDataRange xsd:dateTime
                                           ] .
 
 
@@ -3315,5 +3568,16 @@ gr:Wednesday rdf:type owl:NamedIndividual ,
   gr:category "42" ;
   gr:description "VGhlIFNldmVuIE5vYWhpZGUgTGF3cw0KMS4gQmVsaWVmIGluIEctZA0KMi4gUmVzcGVjdCBHLWQgYW5kIHByYWlzZSBoaW0NCjMuIFJlc3BlY3QgaHVtYW4gbGlmZQ0KNC4gUmVzcGVjdCB0aGUgZmFtaWx5DQo1LiBSZXNwZWN0IGh1bWFuIGJlaW5ncw0KNi4gSGF2ZSBhIGp1ZGljaWFsIHN5c3RlbQ0KNy4gUmVzcGVjdCBhbGwgY3JlYXR1cmVz"
 ] .
+
+#################################################################
+#    Annotations
+#################################################################
+
+gr:hasInventoryLevel rdfs:comment """This property specifies the current approximate inventory level for gr:SomeItems. The unit of measurement and the point value or interval are indicated using the attached gr:QuantitativeValueFloat instance.
+
+This property can also be attached to a gr:Offering in cases where the included products are not modeled in more detail."""@en ;
+                      rdfs:isDefinedBy <http://purl.org/goodrelations/v1> ;
+                      rdfs:label "has inventory level (0..1)"@en .
+
 
 ###  Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi
